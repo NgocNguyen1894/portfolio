@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ngoc Nguyen — HR & Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F5EF;
+    --bg-alt:#EFEBE0;
+    --forest:#26332A;
+    --forest-deep:#1B2620;
+    --ink:#23261F;
+    --ink-soft:#5B5E51;
+    --sage:#7C8A6B;
+    --sage-light:#B7C0A9;
+    --brass:#B08D57;
+    --line:#D9D4C4;
+    --paper:#FCFBF7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'DM Sans',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:'Fraunces',serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 6vw;
+    background:rgba(247,245,239,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-name{font-family:'Fraunces',serif;font-weight:600;font-size:18px;letter-spacing:0.02em;}
+  .nav-links{display:flex;align-items:center;gap:32px;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);}
+  .nav-links a{transition:color .2s;}
+  .nav-links a:hover{color:var(--forest);}
+  .nav-cta{
+    font-size:13px;padding:9px 18px;border:1px solid var(--forest);border-radius:2px;
+    letter-spacing:0.03em;transition:background .2s,color .2s;white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--forest);color:var(--paper);}
+  .lang-toggle{
+    display:flex;align-items:center;gap:0;font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;letter-spacing:0.04em;border:1px solid var(--forest);border-radius:2px;overflow:hidden;
+  }
+  .lang-toggle button{
+    background:transparent;border:none;padding:8px 12px;cursor:pointer;color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.04em;transition:background .2s,color .2s;
+  }
+  .lang-toggle button.active{background:var(--forest);color:var(--paper);}
+  .nav-right{display:flex;align-items:center;gap:18px;}
+  @media(max-width:820px){.nav-links{display:none;}}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    background:radial-gradient(circle at 85% 15%, #34432F 0%, var(--forest) 45%, var(--forest-deep) 100%);
+    color:var(--paper);
+    padding:150px 6vw 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:end;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--sage-light);margin-bottom:22px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--sage-light);display:inline-block;}
+  h1.name{
+    font-family:'Fraunces',serif;font-weight:300;font-size:clamp(46px,6.2vw,84px);line-height:0.98;
+    letter-spacing:-0.01em;margin-bottom:20px;
+  }
+  h1.name em{font-style:italic;font-weight:500;color:#D9C9A6;}
+  .hero-role{font-size:19px;color:var(--sage-light);font-weight:500;margin-bottom:28px;letter-spacing:0.01em;}
+  .hero-goal{
+    font-size:16.5px;color:#E7E4D8;max-width:520px;font-weight:400;line-height:1.75;
+    border-left:2px solid var(--brass);padding-left:18px;
+  }
+  .hero-goal b{color:var(--paper);font-weight:600;}
+
+  /* trajectory graphic */
+  .trajectory{width:100%;}
+  .traj-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sage-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;text-align:right;}
+
+  /* ---------- STATS STRIP ---------- */
+  .stats{
+    background:var(--forest-deep);
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .stat{padding:34px 6vw;border-right:1px solid rgba(255,255,255,0.08);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'Fraunces',serif;font-size:38px;color:var(--paper);font-weight:500;}
+  .stat .lbl{font-size:12.5px;color:var(--sage-light);margin-top:6px;letter-spacing:0.02em;}
+  @media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr);}.stat{padding:24px 5vw;}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:100px 6vw;max-width:1180px;margin:0 auto;}
+  .section-alt{background:var(--bg-alt);max-width:none;}
+  .section-alt > .inner{max-width:1180px;margin:0 auto;padding:100px 6vw;}
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--sage);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+  }
+  .kicker::before{content:'';width:20px;height:1px;background:var(--sage);}
+  h2.section-title{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(28px,3.4vw,42px);
+    margin-bottom:46px;max-width:720px;line-height:1.15;
+  }
+
+  /* ---------- SUMMARY ---------- */
+  .summary-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:start;}
+  .summary-lede{font-family:'Fraunces',serif;font-size:24px;font-weight:400;line-height:1.5;color:var(--ink);}
+  .summary-list{display:flex;flex-direction:column;gap:22px;}
+  .summary-item{display:flex;gap:16px;padding-bottom:22px;border-bottom:1px solid var(--line);}
+  .summary-item:last-child{border-bottom:none;}
+  .summary-item .mark{font-family:'IBM Plex Mono',monospace;color:var(--brass);font-size:13px;padding-top:3px;}
+  .summary-item p{font-size:15px;color:var(--ink-soft);}
+  @media(max-width:820px){.summary-grid{grid-template-columns:1fr;gap:36px;}}
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-item{
+    display:grid;grid-template-columns:200px 1fr;gap:40px;
+    padding:44px 0;border-top:1px solid var(--line);
+  }
+  .exp-item:last-child{border-bottom:1px solid var(--line);}
+  .exp-period{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--sage);letter-spacing:0.02em;}
+  .exp-current{display:inline-block;margin-top:10px;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--brass);border:1px solid var(--brass);padding:3px 8px;border-radius:2px;}
+  .exp-role{font-family:'Fraunces',serif;font-size:23px;font-weight:500;margin-bottom:4px;}
+  .exp-meta{font-size:13.5px;color:var(--ink-soft);margin-bottom:18px;}
+  .exp-meta span{color:var(--sage);}
+  .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .exp-bullets li{
+    font-size:14.5px;color:var(--ink-soft);padding-left:20px;position:relative;line-height:1.65;
+  }
+  .exp-bullets li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--brass);}
+  .exp-bullets li b{color:var(--ink);font-weight:600;}
+  @media(max-width:820px){.exp-item{grid-template-columns:1fr;gap:14px;}}
+
+  /* ---------- SKILLS / GRID CARDS ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .skill-card{background:var(--paper);padding:36px 32px;}
+  .skill-card h3{font-family:'Fraunces',serif;font-size:18px;font-weight:600;margin-bottom:16px;}
+  .skill-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .skill-card li{font-size:14px;color:var(--ink-soft);}
+  @media(max-width:820px){.skills-grid{grid-template-columns:1fr;}}
+
+  /* ---------- AWARDS / CERT ---------- */
+  .accolade-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+  .accolade-col h3{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:22px;}
+  .accolade-row{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line);gap:16px;}
+  .accolade-row:first-of-type{border-top:1px solid var(--line);}
+  .accolade-row .a-name{font-size:15px;font-weight:500;}
+  .accolade-row .a-sub{font-size:12.5px;color:var(--ink-soft);display:block;margin-top:3px;}
+  .accolade-row .a-year{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--brass);white-space:nowrap;}
+  @media(max-width:820px){.accolade-grid{grid-template-columns:1fr;gap:40px;}}
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  footer{
+    background:var(--forest-deep);color:var(--paper);
+    padding:100px 6vw 50px;
+  }
+  .footer-inner{max-width:1180px;margin:0 auto;}
+  footer .kicker{color:var(--sage-light);}
+  footer .kicker::before{background:var(--sage-light);}
+  h2.footer-title{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(32px,4.4vw,54px);max-width:700px;line-height:1.15;margin-bottom:50px;}
+  h2.footer-title em{font-style:italic;color:var(--brass);}
+  .contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;border-top:1px solid rgba(255,255,255,0.12);padding-top:36px;}
+  .contact-item .c-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage-light);margin-bottom:8px;}
+  .contact-item .c-value{font-size:14.5px;font-weight:500;}
+  .contact-item a:hover{color:var(--brass);}
+  .foot-bottom{margin-top:60px;padding-top:26px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;font-size:12px;color:var(--sage-light);flex-wrap:wrap;gap:10px;}
+  @media(max-width:820px){.contact-grid{grid-template-columns:1fr 1fr;}}
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease;}
+    .reveal.in{opacity:1;transform:translateY(0);}
+  }
+  :focus-visible{outline:2px solid var(--brass);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Ngoc Nguyen</div>
+  <div class="nav-links">
+    <a href="#summary" data-i18n="nav_summary">Summary</a>
+    <a href="#experience" data-i18n="nav_experience">Experience</a>
+    <a href="#skills" data-i18n="nav_skills">Skills</a>
+    <a href="#accolades" data-i18n="nav_accolades">Accolades</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button type="button" id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button type="button" id="btn-vi" onclick="setLang('vi')">VI</button>
+    </div>
+    <a class="nav-cta" href="#contact" data-i18n="nav_contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow" data-i18n="hero_eyebrow">HR &amp; Operations Leader · 9+ Years of Experience</div>
+      <h1 class="name">Ngoc<br>Nguyen</h1>
+      <div class="hero-role" data-i18n="hero_role">HR &amp; Operations Manager at INIPOD</div>
+      <p class="hero-goal" data-i18n-html="hero_goal">I'm looking for my next role as an <b>HRBP, HR Manager, or senior HR leader</b> — aligning HR strategy with business objectives, optimizing operations, and building people capability for a fast-growing organization.</p>
+    </div>
+    <div>
+      <div class="traj-label" data-i18n="traj_label">Career Trajectory</div>
+      <svg class="trajectory" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="20,225 130,190 240,140 350,80 430,35" fill="none" stroke="#7C8A6B" stroke-width="1.5"/>
+        <line x1="430" y1="35" x2="470" y2="18" stroke="#B08D57" stroke-width="1.5" stroke-dasharray="3,4"/>
+
+        <circle cx="20" cy="225" r="4" fill="#EFEBE0"/>
+        <text x="20" y="245" fill="#B7C0A9" font-family="IBM Plex Mono" font-size="10">2016</text>
+        <text x="20" y="205" fill="#F7F5EF" font-family="DM Sans" font-size="11" font-weight="600">GA Assistant</text>
+
+        <circle cx="130" cy="190" r="4" fill="#EFEBE0"/>
+        <text x="130" y="210" fill="#B7C0A9" font-family="IBM Plex Mono" font-size="10">2018</text>
+        <text x="130" y="170" fill="#F7F5EF" font-family="DM Sans" font-size="11" font-weight="600">HR Admin</text>
+
+        <circle cx="240" cy="140" r="4" fill="#EFEBE0"/>
+        <text x="240" y="160" fill="#B7C0A9" font-family="IBM Plex Mono" font-size="10">2019</text>
+        <text x="216" y="120" fill="#F7F5EF" font-family="DM Sans" font-size="11" font-weight="600">HR Manager</text>
+
+        <circle cx="350" cy="80" r="4.5" fill="#D9C9A6"/>
+        <text x="350" y="100" fill="#B7C0A9" font-family="IBM Plex Mono" font-size="10">2024</text>
+        <text x="284" y="60" fill="#F7F5EF" font-family="DM Sans" font-size="11" font-weight="600">HR &amp; Ops Manager</text>
+
+        <circle cx="470" cy="18" r="6" fill="none" stroke="#B08D57" stroke-width="1.5" stroke-dasharray="2,3"/>
+        <text x="338" y="12" fill="#B08D57" font-family="IBM Plex Mono" font-size="10.5" font-weight="500">HR LEADERSHIP</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="num mono">9+</div><div class="lbl" data-i18n="stat1">Years in HR &amp; Operations</div></div>
+  <div class="stat"><div class="num mono">100%</div><div class="lbl" data-i18n="stat2">Payroll &amp; Insurance Accuracy</div></div>
+  <div class="stat"><div class="num mono">20+</div><div class="lbl" data-i18n="stat3">Junior Staff Mentored</div></div>
+  <div class="stat"><div class="num mono">90%+</div><div class="lbl" data-i18n="stat4">Employee Satisfaction Rate</div></div>
+</div>
+
+<section id="summary">
+  <div class="kicker" data-i18n="summary_kicker">Summary</div>
+  <h2 class="section-title" data-i18n="summary_title">From HR operations to strategic partner to the CEO</h2>
+  <div class="summary-grid">
+    <p class="summary-lede" data-i18n="summary_lede">HR &amp; Operations Manager with 9+ years building and scaling HR functions for fast-growing organizations — from compliance and C&amp;B to culture and recruitment.</p>
+    <div class="summary-list">
+      <div class="summary-item"><span class="mark">01</span><p data-i18n="summary_1">Strong expertise in HR operations, employee engagement, labor law compliance, and C&amp;B framework development.</p></div>
+      <div class="summary-item"><span class="mark">02</span><p data-i18n="summary_2">Experienced in both strategic and hands-on recruitment to support business growth and strengthen employer branding.</p></div>
+      <div class="summary-item"><span class="mark">03</span><p data-i18n="summary_3">Skilled in optimizing HR processes, leveraging HR data, and partnering with leadership to improve workforce performance and retention.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-alt" id="experience">
+  <div class="inner">
+    <div class="kicker" data-i18n="exp_kicker">Experience</div>
+    <h2 class="section-title" data-i18n="exp_title">A journey across five organizations, three industries</h2>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-period mono">05/2024 — <span data-i18n="present">Present</span></div>
+        <div class="exp-current" data-i18n="tag_current">Current</div>
+      </div>
+      <div>
+        <div class="exp-role">HR &amp; Operations Manager</div>
+        <div class="exp-meta"><span data-i18n="exp1_meta">INIPOD · Technology &amp; AI (Hospitality focus) · Team of 20 · Reports to CEO</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n-html="exp1_b1">Built the entire HR, Legal, and Finance operational framework from scratch within <b>3 months</b>, enabling rapid scaling with <b>100% labor law compliance</b>.</li>
+          <li data-i18n-html="exp1_b2">Managed full-cycle recruitment for critical roles; designed a high-touch candidate experience that persuaded top-tier talent to accept startup offers over major corporations.</li>
+          <li data-i18n-html="exp1_b3">Redesigned the onboarding journey, boosting satisfaction from <b>70% to 90%+</b> and fostering a high-performance culture.</li>
+          <li data-i18n-html="exp1_b4">Partnered with the CEO to align workforce costs with business goals, optimizing the activity budget by <b>20%</b> while maintaining 90% employee satisfaction.</li>
+          <li data-i18n-html="exp1_b5">Designed scalable C&amp;B structures and competency frameworks, ensuring <b>100% payroll accuracy</b> for the leadership pipeline.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-period mono">2024 — <span data-i18n="present">Present</span></div>
+        <div class="exp-current" data-i18n="tag_volunteer">Volunteer Mentor</div>
+      </div>
+      <div>
+        <div class="exp-role" data-i18n="mentor_role">Career Coach &amp; Mentor</div>
+        <div class="exp-meta"><span data-i18n="mentor_meta">HR Companion · HR community &amp; career development</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n-html="mentor_b1">Delivered 1-on-1 and group coaching for HR practitioners, accumulating <b>50+ hours</b> of direct mentorship.</li>
+          <li data-i18n-html="mentor_b2">Advised early-career HR professionals on career direction and core skills, extending a mentorship practice built over the course of my career.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div><div class="exp-period mono">10/2019 — 04/2024</div></div>
+      <div>
+        <div class="exp-role">HR Manager</div>
+        <div class="exp-meta"><span data-i18n="exp2_meta">Hash Consulting Group (HCG) · Technology &amp; AI · Team of 30 · Reports to CEO</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n-html="exp2_b1">Handled full-cycle C&amp;B operations, ensuring <b>100% accuracy</b> in payroll, insurance, and benefits, with monthly CFO reporting.</li>
+          <li data-i18n-html="exp2_b2">Developed and enforced HR policies and compliance systems; represented the company in statutory inspections with <b>zero non-compliance findings</b>.</li>
+          <li data-i18n-html="exp2_b3">Designed and rolled out competency frameworks and career development programs from scratch.</li>
+          <li data-i18n-html="exp2_b4">Mentored <b>20+ young professionals</b> and delivered <b>60+ coaching hours</b>, fostering a culture of continuous learning.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div><div class="exp-period mono">09/2018 — 08/2019</div></div>
+      <div>
+        <div class="exp-role">Legal Executive cum HR Admin</div>
+        <div class="exp-meta"><span data-i18n="exp3_meta">We Ad (We Media) · Cinema advertising · Team of 50 · Reports to Office Manager</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n-html="exp3_b1">Managed payroll, benefits, insurance, and employee records, maintaining <b>100% accuracy</b> in processing.</li>
+          <li data-i18n-html="exp3_b2">Developed HR policies and internal compliance systems supporting consistent operations.</li>
+          <li data-i18n-html="exp3_b3">Served as the primary liaison with labor authorities and represented the company during social insurance inspections.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div><div class="exp-period mono">09/2016 — 08/2017</div></div>
+      <div>
+        <div class="exp-role">General Affair Assistant</div>
+        <div class="exp-meta"><span data-i18n="exp4_meta">Aeon Delight (VN) · Facility management · Team of 500+ · Reports to GA Manager</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n-html="exp4_b1">Managed company-wide legal and administrative operations for <b>500+ employees</b>.</li>
+          <li data-i18n-html="exp4_b2">Standardized contract templates, cutting legal review time by <b>30%</b> and supporting audits with zero non-compliance findings.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-period mono">01/2026 — <span data-i18n="present">Present</span></div>
+        <div class="exp-current" data-i18n="tag_parttime">Part-time</div>
+      </div>
+      <div>
+        <div class="exp-role">HR Advisor</div>
+        <div class="exp-meta"><span data-i18n="exp5_meta">KDT Trading Construction Co., Ltd · Construction · Team of 50+ · Reports to Director</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n-html="exp5_b1">Acted as a strategic HR advisor, consulting management on compensation frameworks, labor compliance, and employee relations for a 50+ employee company.</li>
+          <li data-i18n-html="exp5_b2">Led the development and standardization of salary, bonus, and HR policy frameworks in compliance with labor law, social insurance, and tax regulations.</li>
+          <li data-i18n-html="exp5_b3">Advised the HR team on resolving employee relations and labor law cases, minimizing organizational risk.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="skills">
+  <div class="kicker" data-i18n="skills_kicker">Skills &amp; Tools</div>
+  <h2 class="section-title" data-i18n="skills_title">A modern HR operating toolkit</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3 data-i18n="skills_h1">Operational Tools</h3>
+      <ul><li>Notion</li><li>MS 365</li><li>Google Sheets</li></ul>
+    </div>
+    <div class="skill-card">
+      <h3 data-i18n="skills_h2">HR Systems</h3>
+      <ul><li>Zoho</li><li>Misa</li><li>Frappe</li><li>Odoo</li><li>1Office</li></ul>
+    </div>
+    <div class="skill-card">
+      <h3 data-i18n="skills_h3">AI &amp; Design</h3>
+      <ul><li>ChatGPT</li><li>Gemini</li><li>Canva</li></ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-alt" id="accolades">
+  <div class="inner">
+    <div class="kicker" data-i18n="acc_kicker">Certifications &amp; Awards</div>
+    <h2 class="section-title" data-i18n="acc_title">Recognized at every stage of the journey</h2>
+    <div class="accolade-grid">
+      <div class="accolade-col">
+        <h3 data-i18n="acc_h1">Certifications</h3>
+        <div class="accolade-row">
+          <div><span class="a-name">Employer Branding</span><span class="a-sub">Talent Brand</span></div>
+          <div class="a-year mono">2019</div>
+        </div>
+        <div class="accolade-row">
+          <div><span class="a-name">Career Coach</span><span class="a-sub">Rosie Dao Hanh Giang &amp; Partners</span></div>
+          <div class="a-year mono">2024</div>
+        </div>
+      </div>
+      <div class="accolade-col">
+        <h3 data-i18n="acc_h2">Awards</h3>
+        <div class="accolade-row">
+          <div><span class="a-name">HCG Unsung Hero</span></div>
+          <div class="a-year mono">2020</div>
+        </div>
+        <div class="accolade-row">
+          <div><span class="a-name">HCG Inspired Leader</span></div>
+          <div class="a-year mono">2022</div>
+        </div>
+        <div class="accolade-row">
+          <div><span class="a-name" data-i18n="acc_prize">2nd Prize — Future Ready Manager</span><span class="a-sub">Gem Global</span></div>
+          <div class="a-year mono">2023</div>
+        </div>
+        <div class="accolade-row">
+          <div><span class="a-name" data-i18n="acc_scholarship">HR Growth Path Scholarship</span><span class="a-sub">HR Digest &amp; CareerViet</span></div>
+          <div class="a-year mono">2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="kicker" data-i18n="edu_kicker">Education &amp; Languages</div>
+  <h2 class="section-title" data-i18n="edu_title">Foundation</h2>
+  <div class="summary-grid">
+    <div>
+      <div class="exp-role" style="font-size:20px;" data-i18n="edu_degree">Bachelor of International Law</div>
+      <div class="exp-meta" data-i18n="edu_school">HCMC University of Law · Graduated 09/2016</div>
+    </div>
+    <div class="summary-list">
+      <div class="summary-item"><span class="mark">VI</span><p data-i18n="lang_vi">Vietnamese — native</p></div>
+      <div class="summary-item"><span class="mark">EN</span><p data-i18n="lang_en">English — working proficiency</p></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="kicker" data-i18n="contact_kicker">Contact</div>
+    <h2 class="footer-title" data-i18n-html="contact_title">Let's talk about your next <em>HR leadership</em> role.</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="c-label" data-i18n="c_phone">Phone</div>
+        <div class="c-value"><a href="tel:+84906334904">+84 906 334 904</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="c-label" data-i18n="c_email">Email</div>
+        <div class="c-value"><a href="mailto:kimngoc.law1894@gmail.com">kimngoc.law1894@gmail.com</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="c-label">LinkedIn</div>
+        <div class="c-value"><a href="https://www.linkedin.com/in/ngoc-nguyen-679766194/" target="_blank" rel="noopener">ngoc-nguyen-679766194</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="c-label" data-i18n="c_location">Location</div>
+        <div class="c-value" data-i18n="c_location_val">Marina Tower, Binh Hoa Ward, HCMC</div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot_left">Ngoc Nguyen — HR &amp; Operations Portfolio</span>
+      <span data-i18n="foot_right">Updated 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const I18N = {
+  vi: {
+    nav_summary:"Tổng quan", nav_experience:"Kinh nghiệm", nav_skills:"Năng lực", nav_accolades:"Thành tích", nav_contact:"Liên hệ",
+    hero_eyebrow:"HR & Operations Leader · 9+ năm kinh nghiệm",
+    hero_role:"HR & Operations Manager tại INIPOD",
+    hero_goal:"Đang tìm kiếm cơ hội tiếp theo ở vai trò <b>HRBP, HR Manager hoặc vị trí lãnh đạo HR cấp cao</b> — gắn kết chiến lược nhân sự với mục tiêu kinh doanh, tối ưu vận hành và xây dựng con người cho tổ chức đang tăng trưởng nhanh.",
+    traj_label:"Lộ trình sự nghiệp",
+    stat1:"Năm kinh nghiệm HR & Vận hành", stat2:"Độ chính xác payroll & BHXH", stat3:"Nhân sự trẻ được cố vấn", stat4:"Tỷ lệ hài lòng nhân viên",
+    summary_kicker:"Tổng quan", summary_title:"Từ vận hành nhân sự đến đối tác chiến lược của CEO",
+    summary_lede:"HR & Operations Manager với hơn 9 năm xây dựng và mở rộng bộ máy nhân sự cho các tổ chức tăng trưởng nhanh — từ compliance, C&B đến văn hoá và tuyển dụng.",
+    summary_1:"Chuyên môn sâu về vận hành HR, gắn kết nhân viên, tuân thủ luật lao động và xây dựng khung Compensation & Benefits.",
+    summary_2:"Kinh nghiệm tuyển dụng cả ở tầm chiến lược lẫn thực thi trực tiếp, phục vụ tăng trưởng kinh doanh và củng cố thương hiệu tuyển dụng.",
+    summary_3:"Thành thạo tối ưu quy trình HR, khai thác dữ liệu nhân sự và đồng hành cùng ban lãnh đạo để nâng hiệu suất và giữ chân nhân tài.",
+    exp_kicker:"Kinh nghiệm", exp_title:"Hành trình qua 5 tổ chức, 3 ngành nghề",
+    present:"Hiện tại", tag_current:"Đang đảm nhiệm", tag_volunteer:"Mentor tự nguyện", tag_parttime:"Bán thời gian",
+    exp1_meta:"INIPOD · Công nghệ & AI (trọng tâm Hospitality) · Quy mô 20 · Báo cáo CEO",
+    exp1_b1:"Xây dựng toàn bộ khung vận hành HR, Pháp lý và Tài chính từ con số 0 trong <b>3 tháng</b>, đảm bảo mở rộng nhanh với <b>100% tuân thủ luật lao động</b>.",
+    exp1_b2:"Quản lý tuyển dụng full-cycle cho các vị trí trọng yếu; thiết kế trải nghiệm ứng viên giúp thuyết phục nhân tài chọn startup thay vì tập đoàn lớn.",
+    exp1_b3:"Tái thiết kế hành trình onboarding, nâng mức hài lòng từ <b>70% lên 90%+</b>, xây dựng văn hoá hiệu suất cao.",
+    exp1_b4:"Đồng hành cùng CEO tối ưu chi phí nhân sự, giảm <b>20%</b> ngân sách hoạt động trong khi vẫn duy trì 90% hài lòng.",
+    exp1_b5:"Thiết kế khung C&amp;B và khung năng lực, đảm bảo <b>100% chính xác payroll</b> cho đội ngũ lãnh đạo kế cận.",
+    mentor_role:"Career Coach & Mentor",
+    mentor_meta:"HR Companion · Cộng đồng phát triển nghề HR",
+    mentor_b1:"Coaching 1-1 và theo nhóm cho người làm nghề HR, tích lũy hơn <b>50+ giờ</b> đồng hành trực tiếp.",
+    mentor_b2:"Cố vấn định hướng nghề nghiệp và kỹ năng chuyên môn cho các bạn trẻ mới vào nghề HR, tiếp nối tinh thần mentorship xuyên suốt sự nghiệp.",
+    exp2_meta:"Hash Consulting Group (HCG) · Công nghệ & AI · Quy mô 30 · Báo cáo CEO",
+    exp2_b1:"Vận hành toàn bộ C&amp;B, đảm bảo <b>100% chính xác</b> payroll, bảo hiểm và phúc lợi, báo cáo CFO hàng tháng.",
+    exp2_b2:"Xây dựng hệ thống chính sách và compliance nội bộ; đại diện công ty trong các đợt thanh tra với <b>0 sai phạm</b>.",
+    exp2_b3:"Thiết kế khung năng lực và chương trình phát triển sự nghiệp từ đầu.",
+    exp2_b4:"Cố vấn cho <b>20+ nhân sự trẻ</b>, thực hiện <b>60+ giờ coaching</b>, nuôi dưỡng văn hoá học hỏi liên tục.",
+    exp3_meta:"We Ad (We Media) · Quảng cáo rạp chiếu phim · Quy mô 50 · Báo cáo Office Manager",
+    exp3_b1:"Quản lý payroll, phúc lợi, bảo hiểm và hồ sơ nhân viên, duy trì <b>100% chính xác</b> trong xử lý.",
+    exp3_b2:"Xây dựng chính sách HR và hệ thống compliance nội bộ hỗ trợ vận hành nhất quán.",
+    exp3_b3:"Làm đầu mối pháp lý với cơ quan lao động; đại diện công ty trong các đợt thanh tra BHXH.",
+    exp4_meta:"Aeon Delight (VN) · Quản lý cơ sở vật chất · Quy mô 500+ · Báo cáo GA Manager",
+    exp4_b1:"Quản lý vận hành pháp lý và hành chính toàn công ty cho hơn <b>500 nhân viên</b>.",
+    exp4_b2:"Chuẩn hoá mẫu hợp đồng, giảm <b>30%</b> thời gian rà soát pháp lý, hỗ trợ audit không sai phạm.",
+    exp5_meta:"KDT Trading Construction Co., Ltd · Xây dựng · Quy mô 50+ · Báo cáo Giám đốc",
+    exp5_b1:"Tư vấn chiến lược cho ban lãnh đạo về khung lương thưởng, tuân thủ lao động và quan hệ lao động cho doanh nghiệp 50+ nhân sự.",
+    exp5_b2:"Dẫn dắt xây dựng và chuẩn hoá khung lương, thưởng và chính sách HR theo đúng luật lao động, BHXH và thuế.",
+    exp5_b3:"Cố vấn đội HR xử lý các vụ việc quan hệ lao động, giảm thiểu rủi ro cho tổ chức.",
+    skills_kicker:"Năng lực & công cụ", skills_title:"Bộ công cụ vận hành nhân sự hiện đại",
+    skills_h1:"Công cụ vận hành", skills_h2:"Hệ thống HR", skills_h3:"AI & thiết kế",
+    acc_kicker:"Chứng chỉ & thành tích", acc_title:"Được ghi nhận qua từng chặng đường",
+    acc_h1:"Chứng chỉ", acc_h2:"Giải thưởng",
+    acc_prize:"Giải Nhì — Future Ready Manager", acc_scholarship:"Học bổng HR Growth Path",
+    edu_kicker:"Học vấn & ngôn ngữ", edu_title:"Nền tảng",
+    edu_degree:"Cử nhân Luật Quốc tế", edu_school:"Đại học Luật TP.HCM · Tốt nghiệp 09/2016",
+    lang_vi:"Tiếng Việt — bản ngữ", lang_en:"Tiếng Anh — thành thạo công việc",
+    contact_kicker:"Liên hệ", contact_title:"Sẵn sàng trao đổi về vai trò <em>lãnh đạo HR</em> tiếp theo.",
+    c_phone:"Điện thoại", c_email:"Email", c_location:"Địa điểm", c_location_val:"Marina Tower, P. Bình Hòa, TP.HCM",
+    foot_left:"Ngọc Nguyễn — HR & Operations Portfolio", foot_right:"Cập nhật 2026"
+  }
+};
+
+let currentLang = 'en';
+const ORIGINAL = {};
+
+function captureOriginals(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    ORIGINAL[el.getAttribute('data-i18n')] = { el, mode:'text', value: el.textContent };
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    ORIGINAL[el.getAttribute('data-i18n-html')] = { el, mode:'html', value: el.innerHTML };
+  });
+}
+
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-vi').classList.toggle('active', lang==='vi');
+
+  Object.keys(ORIGINAL).forEach(key=>{
+    const entry = ORIGINAL[key];
+    if(lang === 'en'){
+      if(entry.mode==='text') entry.el.textContent = entry.value;
+      else entry.el.innerHTML = entry.value;
+    } else {
+      const viVal = I18N.vi[key];
+      if(viVal !== undefined){
+        if(entry.mode==='text') entry.el.textContent = viVal;
+        else entry.el.innerHTML = viVal;
+      }
+    }
+  });
+}
+
+captureOriginals();
+setLang('en');
+
+const els = document.querySelectorAll('section, .section-alt .inner');
+els.forEach(el => el.classList.add('reveal'));
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:0.12});
+els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
